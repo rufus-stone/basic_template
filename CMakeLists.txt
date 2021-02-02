@@ -1,6 +1,9 @@
-cmake_minimum_required(VERSION 3.15...3.18)
+cmake_minimum_required(VERSION 3.15...3.19)
 
-# Set up our project
+# +---------------+
+# | Project setup | 
+# +---------------+
+
 project(
   my_proj
   VERSION 0.1.0
@@ -14,9 +17,18 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 # We're using C++17
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
-# Set some compiler options/warnings
-target_compile_options(${PROJECT_NAME} PRIVATE -Werror -Wall -Wextra
-                                               -Wold-style-cast -Wpedantic)
+# Set compiler warnings
+if(MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE -W4 -WX)
+else()
+  target_compile_options(${PROJECT_NAME} PRIVATE -Werror -Wall -Wextra
+                                                 -Wold-style-cast -Wpedantic)
+endif()
+
+
+# +--------------+
+# | Dependencies | 
+# +--------------+
 
 # Conan scripts
 include(${PROJECT_SOURCE_DIR}/cmake/conan.cmake)
@@ -31,7 +43,14 @@ target_include_directories(${PROJECT_NAME}
 # Link libraries to executable
 target_link_libraries(${PROJECT_NAME} PRIVATE CONAN_PKG::spdlog)
 
-include(CTest) # This adds the BUILD_TESTING option (ON by default)
+
+# +-------+
+# | Tests | 
+# +-------+
+
+# Enable testing
+include(CTest)
+message("BUILD_TESTING: ${BUILD_TESTING}")
 if(BUILD_TESTING)
   enable_testing()
   add_subdirectory(test)
