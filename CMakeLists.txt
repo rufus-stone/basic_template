@@ -25,7 +25,7 @@ target_sources(${PROJECT_NAME} PRIVATE src/main.cpp ${SOURCE_FILES})
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
-# We're using C++17
+# We're using C++20
 set_target_properties(
   ${PROJECT_NAME}
   PROPERTIES CXX_STANDARD 20
