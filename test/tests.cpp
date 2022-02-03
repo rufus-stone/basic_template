@@ -1,20 +1,10 @@
-#define CATCH_CONFIG_MAIN // This tells the Catch2 header to generate a main
+#include <catch2/catch_all.hpp>
 
-#include "catch.hpp"
 
 ////////////////////////////////////////////////////////////////
-SCENARIO("Test1", "[test][tags]")
+TEST_CASE("Test1", "[test][tags]")
 {
-  GIVEN("X")
-  {
-    int x = 1;
-    WHEN("Y")
-    {
-      int y = 1;
-      THEN("Z")
-      {
-        REQUIRE(x + y == 2);
-      }
-    }
-  }
+  int x = 1;
+  int y = 1;
+  REQUIRE(x + y == 2);
 }

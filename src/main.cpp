@@ -1,12 +1,10 @@
 #include <spdlog/spdlog.h>
 
-#include "blah.hpp"
+#include "foo.hpp"
 
 int main()
 {
-  spdlog::info("Hello!");
-
-  example::do_thing();
+  spdlog::info("Hello! {}", foo::bar());
 
   return EXIT_SUCCESS;
 }
